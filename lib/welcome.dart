@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class WelcomeScreen extends StatelessWidget {
   
@@ -9,11 +10,16 @@ class WelcomeScreen extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Text("Logo with text"),
+          SvgPicture.asset(
+            'assets/me.svg',
+            semanticsLabel: "MadeEase Logo",
+            width: 100,
+            height: 100,
+          ),
           Text("Wavy icon"),
           RaisedButton(
             color: Theme.of(context).primaryColor,
-            child: Text("Get Started"),
+            child: Text("Get f"),
           )
         ],
       ),
