@@ -12,12 +12,11 @@ class WelcomeScreen extends StatelessWidget {
         children: <Widget>[
           SvgPicture.asset(
             'assets/me.svg',
-            semanticsLabel: "MadeEase Logo",
-            width: 100,
-            height: 100,
+            color: Colors.red,
           ),
-          Text("Wavy icon"),
+          Text("Wavy Icon"),
           RaisedButton(
+            onPressed: () => {},
             color: Theme.of(context).primaryColor,
             child: Text("Get f"),
           )
