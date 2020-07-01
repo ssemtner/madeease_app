@@ -11,15 +11,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'MadeEase',
       initialRoute: '/',
-      routes: {
-        '/': (context) => WelcomeScreen()
-      },
+      routes: {'/': (context) => WelcomeScreen()},
       theme: ThemeData(
+        fontFamily: 'Montserrat',
         backgroundColor: Colors.white,
         primaryColor: Color(0xFF078BFF),
         accentColor: Color(0xFFFF5666),
         cardColor: Color(0xFFF29559),
-
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
     );
@@ -63,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
-      // The Flutter framework has been optimized to make rerunning build methods
+    // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
