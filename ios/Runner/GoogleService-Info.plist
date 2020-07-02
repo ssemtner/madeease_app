@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>941534727528-deg4ftupi7b5k1n1qcop8d40a9lq5m21.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.941534727528-deg4ftupi7b5k1n1qcop8d40a9lq5m21</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCde6DQCIsP6IheV72o5k7XqndvR7KSXHQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>941534727528</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.madeease.madeease-app</string>
+	<key>PROJECT_ID</key>
+	<string>made-ease</string>
+	<key>STORAGE_BUCKET</key>
+	<string>made-ease.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:941534727528:ios:4efdc7db9d48b04044dadd</string>
+	<key>DATABASE_URL</key>
+	<string>https://made-ease.firebaseio.com</string>
+</dict>
+</plist>
