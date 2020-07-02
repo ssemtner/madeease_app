@@ -40,7 +40,7 @@ class WelcomeScreen extends StatelessWidget {
             MERaisedButton(
               width: MediaQuery.of(context).size.width - 50,
               height: 50,
-              action: () => print("button"),
+              action: (context) => Navigator.pushNamed(context, '/login'),
               text: 'Get Started',
             ),
             customSpacer(context, 10)
@@ -48,6 +48,5 @@ class WelcomeScreen extends StatelessWidget {
         ),
       ),
     );
-    // return Scaffold(body: SizedBox(child: Wave(), height: 200));
   }
 }
