@@ -1,43 +1,42 @@
 {
   "project_info": {
-    "project_number": "98354100403",
-    "firebase_url": "https://made-ease-app.firebaseio.com",
-    "project_id": "made-ease-app",
-    "storage_bucket": "made-ease-app.appspot.com"
+    "project_number": "941534727528",
+    "firebase_url": "https://made-ease.firebaseio.com",
+    "project_id": "made-ease",
+    "storage_bucket": "made-ease.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:98354100403:android:313391ec19a0260574d8c6",
+        "mobilesdk_app_id": "1:941534727528:android:8a3abef865f00df344dadd",
         "android_client_info": {
           "package_name": "com.madeease.madeease_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "98354100403-060e7fekpro2oo760ihmaa4torphhgho.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.madeease.madeease_app",
-            "certificate_hash": "72cfbeee48e38fb03afc9f51eb99e963b1b8d026"
-          }
-        },
-        {
-          "client_id": "98354100403-1d3iiuqlus7l7dqm2np0hu69cei297c4.apps.googleusercontent.com",
+          "client_id": "941534727528-01ad3c0vif82qau8gsovqqg9cs41cibi.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBqx_OeTNah3WDKOe484PKOhWDdkMMNyek"
+          "current_key": "AIzaSyAZWHyjnfk7gx6Q7vlezBwHiqwUG1JpnOM"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "98354100403-1d3iiuqlus7l7dqm2np0hu69cei297c4.apps.googleusercontent.com",
+              "client_id": "941534727528-01ad3c0vif82qau8gsovqqg9cs41cibi.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "941534727528-deg4ftupi7b5k1n1qcop8d40a9lq5m21.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.madeease.madeease-app"
+              }
             }
           ]
         }

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:madeease_app/button.dart';
+import 'button.dart';
+import 'authentication.dart';
 
 class LoginScreen extends StatefulWidget {
+  LoginScreen({this.auth, this.loginCallback});
+
+  final BaseAuth auth;
+  final VoidCallback loginCallback;
+
   @override
   LoginScreenState createState() => LoginScreenState();
 }
@@ -14,9 +18,48 @@ class LoginScreenState extends State<LoginScreen> {
   String _email, _password, _errorMessage = '';
   bool _isLoginForm = false, _isLoading = false;
 
-  void validateAndSubmit() {}
+  void validateAndSubmit() async {
+    setState(() {
+      _errorMessage = '';
+      _isLoading = true;
+    });
+    if (validateAndSave()) {
+      String userId = '';
+      try {
+        if (_isLoginForm) {
+          userId = await widget.auth.signIn(_email, _password);
+          print('Signed in: $userId');
+        } else {
+          userId = await widget.auth.signUp(_email, _password);
+          print('Signed up user: $userId');
+        }
+        setState(() {
+          _isLoading = false;
+        });
+        if (userId.length > 0 && userId != null && _isLoginForm) {
+          widget.loginCallback();
+        }
+      } catch (e) {
+        print('Error: $e');
+        setState(() {
+          _isLoading = false;
+          _errorMessage = e.message;
+          _formKey.currentState.reset();
+        });
+      }
+    }
+  }
 
   void resetForm() {}
+
+  bool validateAndSave() {
+    final form = _formKey.currentState;
+    if (form.validate()) {
+      form.save();
+      return true;
+    }
+    return false;
+  }
 
   void toggleFormMode() {
     resetForm();
@@ -26,7 +69,8 @@ class LoginScreenState extends State<LoginScreen> {
   }
 
   Widget showErrorMessage() {
-    if (_errorMessage.length > 0 && _errorMessage != null) {
+    print(_errorMessage);
+    if (_errorMessage != null && _errorMessage.length > 0) {
       return Padding(
         padding: const EdgeInsets.all(8.0),
         child: Text(
@@ -99,7 +143,7 @@ class LoginScreenState extends State<LoginScreen> {
       padding: const EdgeInsets.all(16.0),
       child: MESecondaryButton(
         height: 40.0,
-        width: 20,
+        width: 20.0,
         action: toggleFormMode,
         text: _isLoginForm ? 'Create an account' : 'Have an account? Sign in',
       ),
