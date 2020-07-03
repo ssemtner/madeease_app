@@ -17,16 +17,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'MadeEase',
-        theme: ThemeData(
-          fontFamily: 'Montserrat',
-          backgroundColor: Colors.white,
-          primaryColor: Color(0xFF078BFF),
-          accentColor: Color(0xFFFF5666),
-          cardColor: Color(0xFFF29559),
-          visualDensity: VisualDensity.adaptivePlatformDensity,
-        ),
-        home: RootPage(auth: Auth()));
+      title: 'MadeEase',
+      initialRoute: '/',
+      routes: {
+        '/': (context) => RootPage(auth: Auth()),
+        '/welcome': (context) => WelcomeScreen(),
+      },
+      theme: ThemeData(
+        fontFamily: 'Montserrat',
+        backgroundColor: Colors.white,
+        primaryColor: Color(0xFF078BFF),
+        accentColor: Color(0xFFFF5666),
+        cardColor: Color(0xFFF29559),
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+      ),
+    );
   }
 }
 
