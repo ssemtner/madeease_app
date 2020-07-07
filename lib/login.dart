@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'button.dart';
 import 'authentication.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({this.auth, this.loginCallback});
+  LoginScreen({this.loginCallback});
 
-  final BaseAuth auth;
   final VoidCallback loginCallback;
 
   @override
@@ -27,10 +27,10 @@ class LoginScreenState extends State<LoginScreen> {
       String userId = '';
       try {
         if (_isLoginForm) {
-          userId = await widget.auth.signIn(_email, _password);
+          userId = await context.read<BaseAuth>().signIn(_email, _password);
           print('Signed in: $userId');
         } else {
-          userId = await widget.auth.signUp(_email, _password);
+          userId = await context.read<BaseAuth>().signUp(_email, _password);
           print('Signed up user: $userId');
         }
         setState(() {
@@ -38,12 +38,19 @@ class LoginScreenState extends State<LoginScreen> {
         });
         if (userId.length > 0 && userId != null && _isLoginForm) {
           widget.loginCallback();
+        } else if (userId.length > 0 && userId != null && !(_isLoginForm)) {
+          widget.loginCallback();
         }
       } catch (e) {
         print('Error: $e');
         setState(() {
           _isLoading = false;
-          _errorMessage = e.message;
+          //the following is a band aid fix
+          try {
+            _errorMessage = e.message;
+          } catch (e) {
+            print('OTHER THING: e');
+          }
           _formKey.currentState.reset();
         });
       }

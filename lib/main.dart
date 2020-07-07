@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'welcome.dart';
 import 'login.dart';
 import 'authentication.dart';
+import 'package:provider/provider.dart';
 
 enum AuthStatus {
   NOT_DETERMINED,
@@ -16,30 +17,30 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'MadeEase',
-      initialRoute: '/',
-      routes: {
-        '/': (context) => RootPage(auth: Auth()),
-        '/welcome': (context) => WelcomeScreen(),
-      },
-      theme: ThemeData(
-        fontFamily: 'Montserrat',
-        backgroundColor: Colors.white,
-        primaryColor: Color(0xFF078BFF),
-        accentColor: Color(0xFFFF5666),
-        cardColor: Color(0xFFF29559),
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return Provider<BaseAuth>(
+      create: (_) => Auth(),
+      child: MaterialApp(
+        title: 'MadeEase',
+        initialRoute: '/',
+        routes: {
+          '/': (context) => RootPage(),
+          '/welcome': (context) => WelcomeScreen(),
+          '/login': (context) => LoginScreen(),
+        },
+        theme: ThemeData(
+          fontFamily: 'Montserrat',
+          backgroundColor: Colors.white,
+          primaryColor: Color(0xFF078BFF),
+          accentColor: Color(0xFFFF5666),
+          cardColor: Color(0xFFF29559),
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
       ),
     );
   }
 }
 
 class RootPage extends StatefulWidget {
-  RootPage({this.auth});
-
-  final BaseAuth auth;
-
   @override
   State<StatefulWidget> createState() => _RootPageState();
 }
@@ -51,7 +52,7 @@ class _RootPageState extends State<RootPage> {
   @override
   void initState() {
     super.initState();
-    widget.auth.getCurrentUser().then((user) {
+    context.read<BaseAuth>().getCurrentUser().then((user) {
       setState(() {
         if (user != null) {
           _userId = user?.uid;
@@ -63,9 +64,10 @@ class _RootPageState extends State<RootPage> {
   }
 
   void loginCallback() {
-    widget.auth.getCurrentUser().then((user) {
+    context.read<BaseAuth>().getCurrentUser().then((user) {
       setState(() {
         _userId = user.uid.toString();
+        print(_userId);
       });
     });
     setState(() {
@@ -92,13 +94,18 @@ class _RootPageState extends State<RootPage> {
         break;
       case AuthStatus.NOT_LOGGED_IN:
         return LoginScreen(
-          auth: widget.auth,
           loginCallback: loginCallback,
         );
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
-          return WelcomeScreen();
+          return RaisedButton(
+            onPressed: () {
+              context.read<BaseAuth>().signOut();
+              logoutCallback();
+            },
+            color: Colors.red,
+          );
         } else {
           return buildWaitingScreen();
         }

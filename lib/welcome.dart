@@ -1,13 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:madeease_app/authentication.dart';
 import 'package:madeease_app/button.dart';
 
 class WelcomeScreen extends StatelessWidget {
-  WelcomeScreen({this.auth});
-
-  final BaseAuth auth;
-
   SizedBox customSpacer(context, percentHeight) {
     return SizedBox(
       height: MediaQuery.of(context).size.width * (percentHeight / 100),
@@ -53,8 +48,7 @@ class WelcomeScreen extends StatelessWidget {
               MERaisedButton(
                 width: MediaQuery.of(context).size.width - 50,
                 height: 50,
-                action: () =>
-                    Navigator.pushNamed(context, '/login', arguments: auth),
+                action: () => Navigator.pushNamed(context, '/login'),
                 text: 'Get Started',
               ),
               customSpacer(context, 10)
