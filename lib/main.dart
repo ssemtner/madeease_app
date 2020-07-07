@@ -4,6 +4,8 @@ import 'login.dart';
 import 'authentication.dart';
 import 'package:provider/provider.dart';
 
+//TODO: use provider for callbacks so that there does not have to be fancy argument passing. Provide the welcome screen with arguments and let the welcome screen go to the login screen which can then use them.
+
 enum AuthStatus {
   NOT_DETERMINED,
   NOT_LOGGED_IN,
@@ -75,6 +77,19 @@ class _RootPageState extends State<RootPage> {
     });
   }
 
+  void signUpCallback() {
+    context.read<BaseAuth>().getCurrentUser().then((user) {
+      setState(() {
+        _userId = user.uid.toString();
+        print(_userId);
+      });
+    });
+    setState(() {
+      authStatus = AuthStatus.LOGGED_IN;
+      //something differant for first time sign up can go here, like a tutorial.
+    });
+  }
+
   void logoutCallback() {
     setState(() {
       authStatus = AuthStatus.NOT_LOGGED_IN;
@@ -95,6 +110,7 @@ class _RootPageState extends State<RootPage> {
       case AuthStatus.NOT_LOGGED_IN:
         return LoginScreen(
           loginCallback: loginCallback,
+          signUpCallback: signUpCallback,
         );
         break;
       case AuthStatus.LOGGED_IN:

@@ -5,9 +5,10 @@ import 'authentication.dart';
 import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
-  LoginScreen({this.loginCallback});
+  LoginScreen({this.loginCallback, this.signUpCallback});
 
   final VoidCallback loginCallback;
+  final VoidCallback signUpCallback;
 
   @override
   LoginScreenState createState() => LoginScreenState();
@@ -39,7 +40,7 @@ class LoginScreenState extends State<LoginScreen> {
         if (userId.length > 0 && userId != null && _isLoginForm) {
           widget.loginCallback();
         } else if (userId.length > 0 && userId != null && !(_isLoginForm)) {
-          widget.loginCallback();
+          widget.signUpCallback();
         }
       } catch (e) {
         print('Error: $e');
