@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:madeease_app/tutorial.dart';
 import 'welcome.dart';
 import 'login.dart';
 import 'authentication.dart';
 import 'package:provider/provider.dart';
-
-//TODO: use provider for callbacks so that there does not have to be fancy argument passing. Provide the welcome screen with arguments and let the welcome screen go to the login screen which can then use them.
 
 enum AuthStatus {
   NOT_DETERMINED,
@@ -28,6 +27,7 @@ class MyApp extends StatelessWidget {
           '/': (context) => RootPage(),
           '/welcome': (context) => WelcomeScreen(),
           '/login': (context) => LoginScreen(),
+          '/tutorial/welcome': (context) => TutorialScreen(),
         },
         theme: ThemeData(
           fontFamily: 'Montserrat',
@@ -115,13 +115,7 @@ class _RootPageState extends State<RootPage> {
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
-          return RaisedButton(
-            onPressed: () {
-              context.read<BaseAuth>().signOut();
-              logoutCallback();
-            },
-            color: Colors.red,
-          );
+          Navigator.pushNamed(context, '/tutorial/welcome');
         } else {
           return buildWaitingScreen();
         }
