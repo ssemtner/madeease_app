@@ -39,7 +39,7 @@ class WelcomeScreen extends StatelessWidget {
               Hero(
                 tag: 'wave',
                 child: SvgPicture.asset(
-                  'assets/waves/front.svg',
+                  'assets/waves/white.svg',
                   width: MediaQuery.of(context).size.width,
                   placeholderBuilder: (context) => CircularProgressIndicator(),
                 ),

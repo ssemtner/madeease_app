@@ -22,12 +22,17 @@ class MyApp extends StatelessWidget {
       create: (_) => Auth(),
       child: MaterialApp(
         title: 'MadeEase',
-        initialRoute: '/',
+        initialRoute: '/test',
         routes: {
           '/': (context) => RootPage(),
           '/welcome': (context) => WelcomeScreen(),
           '/login': (context) => LoginScreen(),
           '/tutorial/welcome': (context) => TutorialScreen(),
+          '/test': (context) => TutorialPage(
+                image: 'hi',
+                numPages: 10,
+                currentPage: 3,
+              ),
         },
         theme: ThemeData(
           fontFamily: 'Montserrat',
@@ -115,7 +120,7 @@ class _RootPageState extends State<RootPage> {
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
-          Navigator.pushNamed(context, '/tutorial/welcome');
+          return WelcomeScreen();
         } else {
           return buildWaitingScreen();
         }

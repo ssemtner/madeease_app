@@ -32,3 +32,31 @@ class TutorialScreen extends StatelessWidget {
     );
   }
 }
+
+class TutorialPage extends StatelessWidget {
+  TutorialPage({this.image, this.currentPage, this.numPages});
+  final image;
+  final int currentPage, numPages;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Row(
+            children: <Widget>[Container()],
+          ),
+          Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            color: Theme.of(context).primaryColor,
+            child: Center(
+              child: Text(currentPage.toString()),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+}

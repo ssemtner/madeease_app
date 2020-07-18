@@ -221,7 +221,7 @@ class LoginScreenState extends State<LoginScreen> {
           Hero(
             tag: 'wave',
             child: SvgPicture.asset(
-              'assets/waves/front.svg',
+              'assets/waves/blue.svg',
               width: MediaQuery.of(context).size.width,
             ),
           ),
