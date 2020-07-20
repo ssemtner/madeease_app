@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
                 image: 'hi',
                 numPages: 10,
                 currentPage: 3,
+                tutorialName: "Purchasing an item from Amazon",
               ),
         },
         theme: ThemeData(
