@@ -18,5 +18,5 @@ jobs:
       uses: ncipollo/release-action@v1
       with:
         prerelease: true
-        artifact: "build/app/outputs/flutter-apk/app-debug.apk"
+        artifacts: "build/app/outputs/flutter-apk/app-debug.apk"
         token: ${{ secrets.TOKEN }}
