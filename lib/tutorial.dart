@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:madeease_app/button.dart';
-import 'package:provider/provider.dart';
 
 class TutorialScreen extends StatelessWidget {
   @override
@@ -45,8 +44,24 @@ class TutorialPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
+          SvgPicture.asset(
+            '/assets/waves/white.svg',
+            width: MediaQuery.of(context).size.height,
+            placeholderBuilder: (context) => CircularProgressIndicator(),
+          ),
+          Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            color: Theme.of(context).primaryColor,
+            child: Center(
+              child: Text(
+                tutorialName,
+                style: TextStyle(color: Colors.white, fontSize: 20.0),
+              ),
+            ),
+          ),
           Text(
             tutorialName,
             style: TextStyle(color: Colors.black, fontSize: 20.0),
@@ -54,6 +69,7 @@ class TutorialPage extends StatelessWidget {
           Row(
             children: <Widget>[Container()],
           ),
+          Spacer(),
           Container(
             height: 50,
             width: MediaQuery.of(context).size.width,

@@ -161,8 +161,8 @@ class LoginScreenState extends State<LoginScreen> {
   Widget _showForm() {
     return Form(
       key: _formKey,
-      child: ListView(
-        shrinkWrap: true,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           showEmailInput(),
           showPasswordInput(),
@@ -189,7 +189,7 @@ class LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
         children: <Widget>[
           SizedBox(height: 25),
           SizedBox(
@@ -221,20 +221,15 @@ class LoginScreenState extends State<LoginScreen> {
           Hero(
             tag: 'wave',
             child: SvgPicture.asset(
-              'assets/waves/blue.svg',
+              'assets/waves/white.svg',
               width: MediaQuery.of(context).size.width,
             ),
           ),
-          Expanded(
-            child: Container(
-              // color: Theme.of(context).primaryColor,
-              child: Stack(
-                children: <Widget>[
-                  _showForm(),
-                  _showProgressIndicator(),
-                ],
-              ),
-            ),
+          Stack(
+            children: [
+              _showForm(),
+              _showProgressIndicator(),
+            ],
           )
         ],
       ),

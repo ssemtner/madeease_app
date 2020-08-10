@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       create: (_) => Auth(),
       child: MaterialApp(
         title: 'MadeEase',
-        initialRoute: '/test',
+        initialRoute: '/',
         routes: {
           '/': (context) => RootPage(),
           '/welcome': (context) => WelcomeScreen(),
