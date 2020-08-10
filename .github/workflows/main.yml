@@ -19,4 +19,4 @@ jobs:
       with:
         prerelease: true
         artifacts: "build/app/outputs/flutter-apk/app-armeabi-v7a-debug.apk"
-        token: ${{ secrets.TOKEN }
+        token: ${{ secrets.TOKEN }}
