@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:madeease_app/tutorial.dart';
+import 'package:madeease_app/tutorials.dart';
 import 'welcome.dart';
 import 'login.dart';
 import 'authentication.dart';

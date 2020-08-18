@@ -40,7 +40,8 @@ class LoginScreenState extends State<LoginScreen> {
         if (userId.length > 0 && userId != null && _isLoginForm) {
           widget.loginCallback();
         } else if (userId.length > 0 && userId != null && !(_isLoginForm)) {
-          widget.signUpCallback();
+          // widget.signUpCallback();
+          widget.loginCallback();
         }
       } catch (e) {
         print('Error: $e');

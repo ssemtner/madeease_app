@@ -26,7 +26,7 @@ class TutorialScreen extends StatelessWidget {
             action: () => print('thing'),
             text: 'Take a Tour',
             width: MediaQuery.of(context).size.width - 200,
-          )
+          ),
         ],
       ),
     );
