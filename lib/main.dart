@@ -4,11 +4,22 @@ import 'welcome.dart';
 import 'login.dart';
 import 'authentication.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert';
 
 enum AuthStatus {
   NOT_DETERMINED,
   NOT_LOGGED_IN,
   LOGGED_IN,
+}
+
+class TutorialData {
+  String img;
+  String text;
+
+  tutorialData(Map<String, String> data) {
+    img = data['img'];
+    text = data['text'];
+  }
 }
 
 void main() {
@@ -24,15 +35,20 @@ class MyApp extends StatelessWidget {
         title: 'MadeEase',
         initialRoute: '/',
         routes: {
-          '/': (context) => RootPage(),
+          '/': (context) => Root(),
           '/welcome': (context) => WelcomeScreen(),
           '/login': (context) => LoginScreen(),
           '/tutorial/welcome': (context) => TutorialScreen(),
-          '/test': (context) => TutorialPage(
-                image: 'hi',
-                numPages: 10,
-                currentPage: 3,
-                tutorialName: "Purchasing an item from Amazon",
+          '/test': (context) => TutorialScreen(
+            image: 'hi',
+            numPages: 10,
+            currentPage: 3,
+            tutorialName: "Purchasing an item from Amazon",
+            data: [
+              ['assets/images/test.jpg', 'test'],
+              ['assets/images/test.jpg', 'hello to you'],
+              ['assets/images/hello.png', 'This is a sentence that is a bit longer for testing purposes.']
+            ],
               ),
         },
         theme: ThemeData(
@@ -48,12 +64,12 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class RootPage extends StatefulWidget {
+class Root extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _RootPageState();
+  State<StatefulWidget> createState() => _RootState();
 }
 
-class _RootPageState extends State<RootPage> {
+class _RootState extends State<Root> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = '';
 
@@ -92,7 +108,7 @@ class _RootPageState extends State<RootPage> {
     });
     setState(() {
       authStatus = AuthStatus.LOGGED_IN;
-      //something differant for first time sign up can go here, like a tutorial.
+      //something different for first time sign up can go here, like a tutorial.
     });
   }
 

@@ -1,32 +1,84 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:madeease_app/button.dart';
 
-class TutorialScreen extends StatelessWidget {
+class TutorialScreen extends StatefulWidget {
+  TutorialScreen(
+      {this.image, this.currentPage, this.numPages, this.tutorialName, this.data});
+
+  final image;
+  final data;
+  final int currentPage, numPages;
+  final String tutorialName;
+
+  @override
+  State<StatefulWidget> createState() => TutorialScreenState();
+}
+
+class TutorialScreenState extends State<TutorialScreen> {
+  int currentPage = 1;
+
+  void increasePage() {
+    if (currentPage < widget.numPages) {
+      setState(() {
+        currentPage++;
+      });
+    }
+  }
+
+  void decreasePage() {
+    if (currentPage > 1) {
+      setState(() {
+        currentPage--;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          Row(
-            children: <Widget>[
-              Text('Wave'),
-              SvgPicture.asset(
-                '/assets/logo/m.svg',
-                width: 200,
-              )
-            ],
+          Container(
+            height: 65,
+            width: MediaQuery.of(context).size.width,
+            color: Theme.of(context).primaryColor,
+            padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
+            child: Center(
+              child: Text(
+                widget.tutorialName,
+                style: TextStyle(color: Colors.white, fontSize: 20.0),
+              ),
+            ),
           ),
-          Text(
-            'This is where the text goes.',
-            style: TextStyle(),
+          Expanded(
+            child: TutorialPage(num: currentPage, data: widget.data),
           ),
-          MERaisedButton(
-            action: () => print('thing'),
-            text: 'Take a Tour',
-            width: MediaQuery.of(context).size.width - 200,
-          ),
+          Container(
+            height: 50,
+            width: MediaQuery.of(context).size.width,
+            color: Theme.of(context).primaryColor,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Spacer(),
+                IconButton(
+                  onPressed: decreasePage,
+                  icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                ),
+                Spacer(),
+                Text(
+                  currentPage.toString() + '  /  ' + widget.numPages.toString(),
+                  style: TextStyle(color: Colors.white, fontSize: 20.0),
+                ),
+                Spacer(),
+                IconButton(
+                  onPressed: increasePage,
+                  icon: Icon(Icons.arrow_forward_ios, color: Colors.white),
+                ),
+                Spacer(),
+              ],
+            ),
+          )
         ],
       ),
     );
@@ -34,53 +86,29 @@ class TutorialScreen extends StatelessWidget {
 }
 
 class TutorialPage extends StatelessWidget {
-  TutorialPage(
-      {this.image, this.currentPage, this.numPages, this.tutorialName});
-  final image;
-  final int currentPage, numPages;
-  final String tutorialName;
+  TutorialPage({this.num, this.data});
+
+  final num;
+  final data;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return Container(
+      padding: EdgeInsets.all(20.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          SvgPicture.asset(
-            '/assets/waves/white.svg',
-            width: MediaQuery.of(context).size.height,
-            placeholderBuilder: (context) => CircularProgressIndicator(),
-          ),
-          Container(
-            height: 50,
-            width: MediaQuery.of(context).size.width,
-            color: Theme.of(context).primaryColor,
-            child: Center(
-              child: Text(
-                tutorialName,
-                style: TextStyle(color: Colors.white, fontSize: 20.0),
-              ),
-            ),
-          ),
-          Text(
-            tutorialName,
-            style: TextStyle(color: Colors.black, fontSize: 20.0),
-          ),
-          Row(
-            children: <Widget>[Container()],
+          Spacer(),
+          Image(
+            image: AssetImage(data[num - 1][0]),
+            height: MediaQuery.of(context).size.height / 2,
           ),
           Spacer(),
-          Container(
-            height: 50,
-            width: MediaQuery.of(context).size.width,
-            color: Theme.of(context).primaryColor,
-            child: Center(
-              child: Text(
-                currentPage.toString() + '  /  ' + numPages.toString(),
-                style: TextStyle(color: Colors.white, fontSize: 20.0),
-              ),
-            ),
-          )
+          Text(
+              data[num - 1][1],
+            style: TextStyle(fontSize: 24.0),
+          ),
+          Spacer(),
         ],
       ),
     );

@@ -51,7 +51,7 @@ class LoginScreenState extends State<LoginScreen> {
           try {
             _errorMessage = e.message;
           } catch (e) {
-            print('OTHER THING: ' + e);
+            print('OTHER THING: ' + e.toString());
           }
           _formKey.currentState.reset();
         });
