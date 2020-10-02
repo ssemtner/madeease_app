@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:madeease_app/tutorials.dart';
@@ -62,11 +61,8 @@ class _MyAppState extends State<MyApp> {
           '/login': (context) => LoginScreen(),
           '/tutorial/welcome': (context) => TutorialScreen(),
           '/test': (context) => TutorialScreen(
-            image: 'hi',
-            numPages: 10,
-            currentPage: 3,
-            tutorialName: "Purchasing an item from Amazon",
             data: _tData,
+            id: 0,
           ),
         },
         theme: ThemeData(

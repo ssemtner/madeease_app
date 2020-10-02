@@ -1,7 +1,19 @@
 [
-    [
-        ["assets/images/test.jpg", "test"],
-        ["assets/images/test.jpg", "hello to you"],
-        ["assets/images/hello.png", "This is a sentence that is a bit longer for testing purposes."]
-    ]
+    {
+        "title": "Testing",
+        "content": [
+            [
+                "assets/images/test.jpg",
+                "test"
+            ],
+            [
+                "assets/images/test.jpg",
+                "hello to you"
+            ],
+            [
+                "assets/images/hello.png",
+                "This is a sentence that is a bit longer for testing purposes."
+            ]
+        ]
+    }
 ]

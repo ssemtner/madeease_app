@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:madeease_app/main.dart';
 
 class TutorialScreen extends StatefulWidget {
-  TutorialScreen(
-      {this.image, this.currentPage, this.numPages, this.tutorialName, this.data});
+  TutorialScreen({this.id, this.data});
 
-  final image;
-  final data;
-  final int currentPage, numPages;
-  final String tutorialName;
+  final int id;
+  final TutorialData data;
 
   @override
   State<StatefulWidget> createState() => TutorialScreenState();
@@ -15,18 +13,17 @@ class TutorialScreen extends StatefulWidget {
 
 class TutorialScreenState extends State<TutorialScreen> {
   int currentPage = 1;
-  int pages;
+  String tutorialName;
   var data;
 
   @override
   void initState() {
     super.initState();
-    data = widget.data.data[0];
-    pages = data.length;
+    data = widget.data.data[widget.id];
   }
 
   void increasePage() {
-    if (currentPage < pages) {
+    if (currentPage < data['content'].length) {
       setState(() {
         currentPage++;
       });
@@ -54,13 +51,13 @@ class TutorialScreenState extends State<TutorialScreen> {
             padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
             child: Center(
               child: Text(
-                widget.tutorialName,
+                data['title'],
                 style: TextStyle(color: Colors.white, fontSize: 20.0),
               ),
             ),
           ),
           Expanded(
-            child: TutorialPage(num: currentPage, data: data),
+            child: TutorialPage(num: currentPage, data: data['content']),
           ),
           Container(
             height: 50,
@@ -76,7 +73,7 @@ class TutorialScreenState extends State<TutorialScreen> {
                 ),
                 Spacer(),
                 Text(
-                  currentPage.toString() + '  /  ' + pages.toString(),
+                  currentPage.toString() + '  /  ' + data['content'].length.toString(),
                   style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 Spacer(),
