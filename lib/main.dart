@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:madeease_app/tutorials.dart';
 import 'welcome.dart';
 import 'login.dart';
@@ -15,26 +16,39 @@ enum AuthStatus {
 }
 
 class TutorialData {
-  getData(BuildContext context) async {
-    var d = json.decode(
-      await DefaultAssetBundle.of(context).loadString('assets/data.json')
-    );
-    return d;
-  }
+  TutorialData({this.data});
+  final data;
+}
 
-  TutorialData(this.context) {
-    this.data = getData(context);
-  }
+Future<String> _loadDataAsset(String path) async {
+  return await rootBundle.loadString(path);
+}
 
-  final context;
-  var data;
+Future<TutorialData> getTutorialData() async {
+  String jsonString = await _loadDataAsset('assets/data.json');
+  final jsonResponse = json.decode(jsonString);
+  return TutorialData(data: jsonResponse);
 }
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  TutorialData _tData;
+  @override
+  void initState() {
+    super.initState();
+    getTutorialData().then((d) => setState(() {
+      _tData = d;
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Provider<BaseAuth>(
@@ -52,7 +66,7 @@ class MyApp extends StatelessWidget {
             numPages: 10,
             currentPage: 3,
             tutorialName: "Purchasing an item from Amazon",
-            data: TutorialData(context),
+            data: _tData,
           ),
         },
         theme: ThemeData(

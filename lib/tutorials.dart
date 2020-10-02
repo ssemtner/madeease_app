@@ -15,21 +15,18 @@ class TutorialScreen extends StatefulWidget {
 
 class TutorialScreenState extends State<TutorialScreen> {
   int currentPage = 1;
+  int pages;
   var data;
-
-  returnData() async {
-    return await widget.data;
-  }
 
   @override
   void initState() {
     super.initState();
-    data = returnData();
-    print(data);
+    data = widget.data.data[0];
+    pages = data.length;
   }
 
   void increasePage() {
-    if (currentPage < widget.numPages) {
+    if (currentPage < pages) {
       setState(() {
         currentPage++;
       });
@@ -79,7 +76,7 @@ class TutorialScreenState extends State<TutorialScreen> {
                 ),
                 Spacer(),
                 Text(
-                  currentPage.toString() + '  /  ' + widget.numPages.toString(),
+                  currentPage.toString() + '  /  ' + pages.toString(),
                   style: TextStyle(color: Colors.white, fontSize: 20.0),
                 ),
                 Spacer(),
