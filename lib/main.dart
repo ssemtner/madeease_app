@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:madeease_app/tutorials.dart';
 import 'welcome.dart';
@@ -13,13 +15,19 @@ enum AuthStatus {
 }
 
 class TutorialData {
-  String img;
-  String text;
-
-  tutorialData(Map<String, String> data) {
-    img = data['img'];
-    text = data['text'];
+  getData(BuildContext context) async {
+    var d = json.decode(
+      await DefaultAssetBundle.of(context).loadString('assets/data.json')
+    );
+    return d;
   }
+
+  TutorialData(this.context) {
+    this.data = getData(context);
+  }
+
+  final context;
+  var data;
 }
 
 void main() {
@@ -44,12 +52,8 @@ class MyApp extends StatelessWidget {
             numPages: 10,
             currentPage: 3,
             tutorialName: "Purchasing an item from Amazon",
-            data: [
-              ['assets/images/test.jpg', 'test'],
-              ['assets/images/test.jpg', 'hello to you'],
-              ['assets/images/hello.png', 'This is a sentence that is a bit longer for testing purposes.']
-            ],
-              ),
+            data: TutorialData(context),
+          ),
         },
         theme: ThemeData(
           fontFamily: 'Montserrat',
@@ -72,6 +76,7 @@ class Root extends StatefulWidget {
 class _RootState extends State<Root> {
   AuthStatus authStatus = AuthStatus.NOT_DETERMINED;
   String _userId = '';
+  var data;
 
   @override
   void initState() {

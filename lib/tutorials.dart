@@ -15,6 +15,18 @@ class TutorialScreen extends StatefulWidget {
 
 class TutorialScreenState extends State<TutorialScreen> {
   int currentPage = 1;
+  var data;
+
+  returnData() async {
+    return await widget.data;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    data = returnData();
+    print(data);
+  }
 
   void increasePage() {
     if (currentPage < widget.numPages) {
@@ -51,7 +63,7 @@ class TutorialScreenState extends State<TutorialScreen> {
             ),
           ),
           Expanded(
-            child: TutorialPage(num: currentPage, data: widget.data),
+            child: TutorialPage(num: currentPage, data: data),
           ),
           Container(
             height: 50,

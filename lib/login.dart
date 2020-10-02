@@ -28,10 +28,10 @@ class LoginScreenState extends State<LoginScreen> {
       String userId = '';
       try {
         if (_isLoginForm) {
-          userId = await context.read<BaseAuth>().signIn(_email, _password);
+          userId = await Provider.of<BaseAuth>(context).signIn(_email, _password);
           print('Signed in: $userId');
         } else {
-          userId = await context.read<BaseAuth>().signUp(_email, _password);
+          userId = await Provider.of<BaseAuth>(context).signUp(_email, _password);
           print('Signed up user: $userId');
         }
         setState(() {
